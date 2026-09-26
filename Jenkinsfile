@@ -48,6 +48,21 @@ pipeline {
     post {
 
         always {
+             // Archive Playwright HTML report
+            archiveArtifacts(
+                artifacts: 'playwright-report/**',
+                allowEmptyArchive: true
+            )
+             // Publish Playwright HTML report in Jenkins
+            publishHTML([
+                allowMissing: true,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'playwright-report',
+                reportFiles: 'index.html',
+                reportName: 'Playwright HTML Report'
+            ])
+
             echo "Build completed with status: ${currentBuild.currentResult}"
         }
 
