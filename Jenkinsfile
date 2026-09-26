@@ -1,5 +1,5 @@
 // Jenkinsfile.windows
-// Jenkins pipeline for Playwright + Cucumber project on Windows
+// Jenkins pipeline for Playwright project on Windows
 
 pipeline {
 
@@ -38,9 +38,9 @@ pipeline {
             }
         }
 
-        stage('▶️ Run Cucumber Tests') {
+        stage('▶️ Run Playwright Tests') {
             steps {
-                powershell 'npm run test:cucumber'
+                powershell 'npm test'
             }
         }
     }
@@ -52,11 +52,11 @@ pipeline {
         }
 
         success {
-            echo "✅ Cucumber tests completed successfully."
+            echo "✅ Playwright tests completed successfully."
         }
 
         failure {
-            echo "❌ Cucumber tests failed."
+            echo "❌ Playwright tests failed."
         }
     }
 }
