@@ -7,3 +7,8 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 *.war
+.env
+.vscode/
+screenshots/
+playwright-report/
+test-results/
