@@ -62,6 +62,21 @@ pipeline {
                 reportFiles: 'index.html',
                 reportName: 'Playwright HTML Report'
             ])
+            // Send Email Notification with HTML Report Attached
+            emailext (
+                to: 'your-email@example.com', // ⚠️ Replace with your email address
+                subject: "${currentBuild.currentResult}: Job '${env.JOB_NAME}' [#${env.BUILD_NUMBER}]",
+                mimeType: 'text/html',
+                body: """
+                    <h2>Build Status: ${currentBuild.currentResult}</h2>
+                    <p><b>Job:</b> ${env.JOB_NAME}</p>
+                    <p><b>Build Number:</b> #${env.BUILD_NUMBER}</p>
+                    <p><b>URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    <hr/>
+                    <p>The Playwright HTML test report is attached to this email.</p>
+                """,
+                attachmentsPattern: 'playwright-report/index.html'
+            )
 
             echo "Build completed with status: ${currentBuild.currentResult}"
         }
